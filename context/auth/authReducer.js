@@ -1,4 +1,4 @@
-import { LIMPIAR_ALERTA, REGISTRO_ERROR, REGISTRO_EXITOSO } from "../../types";
+import { CERRAR_SESION, INICIARSESION_ERROR, INICIARSESION_EXITO, LIMPIAR_ALERTA, REGISTRO_ERROR, REGISTRO_EXITOSO, USUARIO_AUTENTICADO } from "../../types";
 
 
 
@@ -7,15 +7,36 @@ export default (state, action) =>{
     switch(action.type){
         case REGISTRO_EXITOSO:
         case REGISTRO_ERROR:
+        case INICIARSESION_ERROR:
             return{
             ...state,
             mensaje: action.payload,
             }
+        case INICIARSESION_EXITO:
+            localStorage.setItem('token', action.payload)
+            return{
+                ...state,
+                token: action.payload,
+                autenticado: true
+            }    
         case LIMPIAR_ALERTA:
             return{
                 ...state,
                 mensaje: null
-            }   
+            } 
+        case USUARIO_AUTENTICADO:
+            return{
+                ...state,
+                usuario: action.payload
+            }
+        case CERRAR_SESION:
+            localStorage.removeItem('token')
+            return{
+                ...state,
+                token:null,
+                usuario: null,
+                autenticado:null,
+            }          
         default:
             return state;
     }

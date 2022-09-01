@@ -1,12 +1,34 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { useFormik } from "formik";
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import Layout from "../components/Layout";
 import * as Yup from 'yup'
+import authContext from "../context/auth/authContext";
+import Alerta from "../components/Alerta";
+import { useRouter } from "next/router";
 
 
 const login = () => {
-  
-    // eslint-disable-next-line react-hooks/rules-of-hooks
+   
+    //definir el context
+   
+    const AuthContext = useContext(authContext);
+    const {iniciarSesion, mensaje, autenticado} = AuthContext;
+    // next router
+
+
+    const router = useRouter()
+
+    useEffect(()=>{
+
+     if(autenticado){
+      router.push('/')
+     }
+
+    },[autenticado])
+
+    // Formulario y validaciion con formik y yup
+   
     const formik = useFormik({
       initialValues: {
         email:'',
@@ -24,7 +46,7 @@ const login = () => {
                                       
       }),
       onSubmit: (val)=>{
-        console.log('enviando formulario ',val)
+        iniciarSesion(val)
       }
     });
   return (
@@ -34,6 +56,7 @@ const login = () => {
         <h2 className="text-4xl font-sans font-bold text-gray-800 text-center my-4">
           Login
         </h2>
+        {mensaje && <Alerta/>}
         <div className="flex justify-center mt-5">
           <div className="w-full max-w-lg">
 

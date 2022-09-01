@@ -2,7 +2,7 @@ import { useFormik } from "formik";
 import React, { useContext } from "react";
 import Layout from "../components/Layout";
 import * as Yup from 'yup'
-import authContext from "../context/auth/AuthContext";
+import authContext from "../context/auth/authContext";
 import Alerta from "../components/Alerta";
 
 
