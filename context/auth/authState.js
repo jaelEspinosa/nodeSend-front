@@ -1,7 +1,7 @@
 import authContext from "./authContext";
 import React,{ useReducer } from 'react'
 import authReducer from "./authReducer";
-import {CERRAR_SESION, INICIARSESION_ERROR, INICIARSESION_EXITO, LIMPIAR_ALERTA, REGISTRO_ERROR, REGISTRO_EXITOSO, USUARIO_AUTENTICADO} from '../../types'
+import {CERRAR_SESION, INICIARSESION_ERROR, INICIARSESION_EXITO, OCULTAR_ALERTA, REGISTRO_ERROR, REGISTRO_EXITOSO, USUARIO_AUTENTICADO} from '../../types'
 import { useRouter } from "next/router";
 
 import clienteAxios from "../../config/axios";
@@ -45,7 +45,7 @@ const router = useRouter()
     }
     setTimeout(() => {
       dispatch({
-        type:LIMPIAR_ALERTA,
+        type:OCULTAR_ALERTA,
         
       })
     }, 3000); 
@@ -68,7 +68,7 @@ const router = useRouter()
     }
     setTimeout(() => {
       dispatch({
-        type:LIMPIAR_ALERTA,
+        type:OCULTAR_ALERTA,
         
       })
     }, 3000);
@@ -94,7 +94,7 @@ const router = useRouter()
       })
       setTimeout(() => {
         dispatch({
-          type:LIMPIAR_ALERTA,
+          type:OCULTAR_ALERTA,
           
         })
       }, 3000);

@@ -1,4 +1,4 @@
-import { CERRAR_SESION, INICIARSESION_ERROR, INICIARSESION_EXITO, LIMPIAR_ALERTA, REGISTRO_ERROR, REGISTRO_EXITOSO, USUARIO_AUTENTICADO } from "../../types";
+import { CERRAR_SESION, INICIARSESION_ERROR, INICIARSESION_EXITO, OCULTAR_ALERTA, REGISTRO_ERROR, REGISTRO_EXITOSO, USUARIO_AUTENTICADO } from "../../types";
 
 
 
@@ -19,7 +19,7 @@ export default (state, action) =>{
                 token: action.payload,
                 autenticado: true
             }    
-        case LIMPIAR_ALERTA:
+        case OCULTAR_ALERTA:
             return{
                 ...state,
                 mensaje: null
