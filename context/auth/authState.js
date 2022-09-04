@@ -54,7 +54,7 @@ const router = useRouter()
   const iniciarSesion =  async datos =>{
     try {
       const respuesta = await clienteAxios.post('/api/auth',datos)
-      console.log(respuesta)
+    
       dispatch({
         type: INICIARSESION_EXITO,
         payload: respuesta.data.token
@@ -82,11 +82,13 @@ const router = useRouter()
       }  
     try {
       const respuesta = await clienteAxios.get('api/auth')
-      console.log(respuesta.data.usuario)
-      dispatch({
-        type: USUARIO_AUTENTICADO,
-        payload: respuesta.data.usuario
-      })
+      if(respuesta.data.usuario){
+        dispatch({
+          type: USUARIO_AUTENTICADO,
+          payload: respuesta.data.usuario
+        })
+      }
+      
     } catch (error) {
       dispatch({
         type: INICIARSESION_ERROR,

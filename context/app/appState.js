@@ -1,7 +1,7 @@
 
 import React,{useReducer}from 'react'
 import clienteAxios from '../../config/axios'
-import { CREAR_ENLACE_EXITO, MOSTRAR_ALERTA,
+import { AGREGAR_DESCARGAS, AGREGAR_PASSWORD, CREAR_ENLACE_EXITO, LIMPIAR_STATE, MOSTRAR_ALERTA,
          OCULTAR_ALERTA,
          SUBIR_ARCHIVO,
          SUBIR_ARCHIVO_ERROR,
@@ -63,7 +63,7 @@ try {
   console.log(error)
   dispatch({
     type: SUBIR_ARCHIVO_ERROR,
-    payload: 'Hubo un Error'
+    payload: error.response.data.msg
     
   })
 }};
@@ -89,7 +89,31 @@ const crearEnlace = async ()=>{
     console.log(error)
   }
 }                 
-   
+// limpiar state
+
+const limpiarState = ()=>{
+  dispatch({
+    type:LIMPIAR_STATE,
+    
+  })
+}
+// agregando un password
+
+const agregarPassword = password =>{
+  dispatch({
+    type:AGREGAR_PASSWORD,
+    payload: password
+  })
+  
+}
+// agregar la cantidad de descargas
+
+const setDescargas = descargas =>{
+  dispatch({
+    type:AGREGAR_DESCARGAS,
+    payload: descargas
+  })
+}
     
     return(
       <appContext.Provider
@@ -105,6 +129,9 @@ const crearEnlace = async ()=>{
               mostrarAlerta,
               subirArchivo,
               crearEnlace,
+              limpiarState,
+              agregarPassword,
+              setDescargas,
              }}
              >
 

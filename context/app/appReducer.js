@@ -1,6 +1,6 @@
 /* eslint-disable import/no-anonymous-default-export */
 
-import { OCULTAR_ALERTA, MOSTRAR_ALERTA, SUBIR_ARCHIVO_EXITO, SUBIR_ARCHIVO_ERROR, SUBIR_ARCHIVO, CREAR_ENLACE_EXITO } from "../../types"
+import { OCULTAR_ALERTA, MOSTRAR_ALERTA, SUBIR_ARCHIVO_EXITO, SUBIR_ARCHIVO_ERROR, SUBIR_ARCHIVO, CREAR_ENLACE_EXITO, LIMPIAR_STATE, AGREGAR_PASSWORD, AGREGAR_DESCARGAS } from "../../types"
 
 export default (state, action)=>{
     switch (action.type) {
@@ -36,7 +36,30 @@ export default (state, action)=>{
             return{
                 ...state,
                 url:action.payload
-            }      
+            }
+        case LIMPIAR_STATE:{
+            return{
+                ...state,
+                mensaje_archivo: null,
+                nombre: null,
+                nombre_original:null,
+                cargando:null,
+                descargas: 1,
+                password:'',
+                autor:null,
+                url:''
+            }
+        }
+        case AGREGAR_PASSWORD:
+             return{
+                ...state,
+                password:action.payload
+             }   
+        case AGREGAR_DESCARGAS:
+            return{
+                ...state,
+                descargas:action.payload
+            }               
         
         default:
             return state
